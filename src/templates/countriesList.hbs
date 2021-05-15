@@ -1,0 +1,11 @@
+<div class="countries">
+    <p class="text countries__text">Maybe you mean...</p>
+    <ul class="countries__list">
+        {{#each this}}
+        <li class="countries__item">
+            <img src="{{flag}}" alt="{{name}}" class="countries__flag">
+            <p class="text countries__name">{{name}}</p>
+        </li>
+        {{/each}}
+    </ul>
+</div>

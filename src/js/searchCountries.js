@@ -5,33 +5,29 @@ import countriesListTpl from '../templates/countriesList.hbs';
 import { searchInput, cardContainer } from './refs';
 import { manyMatchesErrorMsg, notFoundErrorMsg } from './notifications';
 
-const renderCountriesList = countries => {
-  const countriesListMarkup = countriesListTpl(countries);
-  cardContainer.insertAdjacentHTML('beforeend', countriesListMarkup);
-};
+const reset = () => (cardContainer.innerHTML = '');
 
-const renderCountryCard = country => {
-  const countryCardMarkup = countryCardTpl(country);
-  cardContainer.insertAdjacentHTML('beforeend', countryCardMarkup);
+const render = markup => {
+  cardContainer.insertAdjacentHTML('beforeend', markup);
 };
 
 const renderMarkup = data => {
   const countries = data.length;
+  const countryCardMarkup = countryCardTpl(data);
+  const countriesListMarkup = countriesListTpl(data);
 
   if (countries > 10) {
     return manyMatchesErrorMsg();
   }
 
   if (countries >= 2 && countries <= 10) {
-    renderCountriesList(data);
+    render(countriesListMarkup);
   }
 
   if (countries === 1) {
-    renderCountryCard(data);
+    render(countryCardMarkup);
   }
 };
-
-const reset = () => (cardContainer.innerHTML = '');
 
 const onSearch = () => {
   reset();
